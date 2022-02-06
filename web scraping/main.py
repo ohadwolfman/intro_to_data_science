@@ -21,11 +21,12 @@ all_links = [i["href"] for i in links_eatable]
 
 
 # we found out that every link which has less than 14 digits is irrelevant
-links = []
-for link in all_links:
-    if len(link) >= 14:
-        links.append(link)
-print(links)
+def links_list(lst):
+    links = []
+    for link in lst:
+        if len(link) >= 14:
+            links.append(link)
+    return links
 
 
 def get_html_into_soup(string):
@@ -33,7 +34,8 @@ def get_html_into_soup(string):
     soupy = BeautifulSoup(html, features="lxml")
     return soupy
 
-#   links1 = soup.find("ul", attrs={"class":"socials"})
-#    links = links1.find_all("a")
-#    actual_links = [i['href'] for i in links]
-#    print(actual_links)
+
+def data_food(link):
+    link2 = urllib.request.urlopen(link)
+    food = link2.select("li#data-food")
+    return food
